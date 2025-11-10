@@ -1,0 +1,8 @@
+package com.rishikesh.springboot.ratelimiter.config;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class RateLimiterConfig {
+
+}

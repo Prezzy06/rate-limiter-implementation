@@ -1,0 +1,24 @@
+# Maven build artifacts
+target/
+
+# Git files
+.git
+.gitignore
+
+# IDE / editor
+.idea/
+.vscode/
+*.iml
+*.class
+
+# Logs
+*.log
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local configs
+application.properties
+application.yml
+application-local.yml
