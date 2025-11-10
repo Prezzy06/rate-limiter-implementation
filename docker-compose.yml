@@ -1,0 +1,35 @@
+services:
+  rate-limiter-backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: rate-limiter-backend
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 40s
+    networks:
+      - rate-limiter-network
+
+  rate-limiter-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: rate-limiter-frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      rate-limiter-backend:
+        condition: service_healthy
+    environment:
+      - VITE_API_URL=http://localhost:8080
+    networks:
+      - rate-limiter-network
+
+networks:
+  rate-limiter-network:
+    driver: bridge
